@@ -9,7 +9,9 @@ export function StickScene({ scene }: Props) {
   return (
     <div className={`stick-scene stick-scene--${scene}`}>
       <svg
-        viewBox="0 0 320 260"
+        viewBox={
+          scene === 'palitos_luxor_quest' ? '0 0 320 278' : '0 0 320 260'
+        }
         className="stick-svg"
         role="img"
         aria-label="Illustration for this chapter"
@@ -60,6 +62,9 @@ export function StickScene({ scene }: Props) {
         )}
         {scene === 'talked_to_father' && (
           <TalkedToFatherScene reduce={reduce} />
+        )}
+        {scene === 'palitos_luxor_quest' && (
+          <PalitosLuxorQuestScene reduce={reduce} />
         )}
       </svg>
     </div>
@@ -402,7 +407,7 @@ function TalkedToFatherScene({ reduce }: { reduce: boolean }) {
   return (
     <>
       <text x="88" y="28" className="stick-svg-label" fontSize="10" fill="var(--stick-muted)">
-        10 April · with your dad
+        27 March · with your dad
       </text>
       <rect x="32" y="52" width="256" height="108" rx="14" fill="var(--stick-warm-bg)" stroke="var(--stick-stroke)" strokeWidth="2" />
       <text x="124" y="78" className="stick-svg-label" fontSize="9" fill="var(--stick-muted)">
@@ -435,6 +440,375 @@ function TalkedToFatherScene({ reduce }: { reduce: boolean }) {
       />
       <text x="98" y="122" className="stick-svg-label" fontSize="10" fontWeight="600" fill="var(--stick-gold)">
         respect · clarity · care
+      </text>
+    </>
+  )
+}
+
+function PalitosLuxorQuestScene({ reduce }: { reduce: boolean }) {
+  /** Aligned grid: Cairo | Luxor same top/height; 3 shops centered in Luxor */
+  const rowY = 52
+  const rowH = 90
+  const cairoX = 10
+  const cairoW = 118
+  const luxorX = cairoX + cairoW + 8
+  const luxorW = 320 - luxorX - 10
+  const cairoCx = Math.round(cairoX + cairoW / 2)
+  const pad = 12
+  const luxorInnerL = luxorX + pad
+  const luxorInnerW = luxorW - pad * 2
+  const shopW = 36
+  const shopGap = 10
+  const shopCount = 3
+  const shopsTotalW = shopCount * shopW + (shopCount - 1) * shopGap
+  const shopRowStartX = luxorInnerL + (luxorInnerW - shopsTotalW) / 2
+  const shopYs = rowY + 50
+  const storeXs = [0, 1, 2].map((i) => shopRowStartX + i * (shopW + shopGap))
+  const winIndex = 2
+  const winCx = storeXs[winIndex] + shopW / 2
+  /** Hips Y so feet sit just inside panel bottom */
+  const cairoStickY = rowY + rowH - 34
+
+  return (
+    <>
+      <defs>
+        <linearGradient id="palitosBagGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#f4a84a" />
+          <stop offset="100%" stopColor="#d97a28" />
+        </linearGradient>
+        <filter id="palitosWinGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.5" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <text
+        x="160"
+        y="15"
+        textAnchor="middle"
+        className="stick-svg-label"
+        fontSize="9"
+        fill="var(--stick-muted)"
+      >
+        9 April · Cairo → every shop in Luxor
+      </text>
+
+      {/* Wish bubble — centered, doesn’t overlap panels */}
+      <motion.g
+        initial={reduce ? false : { opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <ellipse cx="160" cy="34" rx="108" ry="18" fill="#fff" stroke="var(--stick-accent)" strokeWidth="2" />
+        <text
+          x="160"
+          y="30"
+          textAnchor="middle"
+          className="stick-svg-label"
+          fontSize="8"
+          fill="var(--stick-muted)"
+        >
+          “wish I had{' '}
+          <tspan fontWeight="700" fill="var(--stick-accent)">
+            Palitos
+          </tspan>
+          …”
+        </text>
+        <circle cx="58" cy="34" r="11" fill="var(--stick-head)" stroke="var(--stick-stroke)" strokeWidth="1.5" />
+        <circle cx="56" cy="32" r="1.8" fill="var(--stick-stroke)" />
+        <circle cx="60" cy="32" r="1.8" fill="var(--stick-stroke)" />
+        <path
+          d="M 52 38 Q 58 42 64 38"
+          fill="none"
+          stroke="var(--stick-stroke)"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+        />
+      </motion.g>
+
+      {/* Cairo — same height as Luxor; you + phone only */}
+      <rect
+        x={cairoX}
+        y={rowY}
+        width={cairoW}
+        height={rowH}
+        rx="12"
+        fill="#e8f2fc"
+        stroke="var(--stick-stroke)"
+        strokeWidth="2"
+      />
+      <text
+        x={cairoCx}
+        y={rowY + 18}
+        textAnchor="middle"
+        className="stick-svg-label"
+        fontSize="9"
+        fontWeight="700"
+        fill="var(--stick-muted)"
+      >
+        Cairo
+      </text>
+      <text
+        x={cairoCx}
+        y={rowY + 30}
+        textAnchor="middle"
+        className="stick-svg-label"
+        fontSize="6"
+        fill="var(--stick-muted)"
+      >
+        me · on the phone
+      </text>
+      <StickPerson x={cairoCx} y={cairoStickY} happy phone scale={0.78} />
+
+      {/* Call lines: Cairo right → Luxor left, aligned to panel mid */}
+      {!reduce ? (
+        <>
+          <motion.path
+            d={`M ${cairoX + cairoW - 4} ${rowY + 48} Q ${(cairoX + cairoW + luxorX) / 2} ${rowY + 28} ${luxorX + 6} ${rowY + 48}`}
+            fill="none"
+            stroke="var(--stick-accent)"
+            strokeWidth="1.6"
+            strokeDasharray="4 5"
+            opacity="0.75"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1.1, repeat: Infinity, repeatDelay: 0.35 }}
+          />
+          <motion.path
+            d={`M ${cairoX + cairoW - 4} ${rowY + 56} Q ${(cairoX + cairoW + luxorX) / 2 + 8} ${rowY + 38} ${luxorX + 6} ${rowY + 58}`}
+            fill="none"
+            stroke="var(--stick-accent)"
+            strokeWidth="1.2"
+            strokeDasharray="3 5"
+            opacity="0.55"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1.3, repeat: Infinity, repeatDelay: 0.2 }}
+          />
+          <motion.path
+            d={`M ${cairoX + cairoW - 4} ${rowY + 64} Q ${(cairoX + cairoW + luxorX) / 2 + 16} ${rowY + 50} ${luxorX + 6} ${rowY + 68}`}
+            fill="none"
+            stroke="var(--stick-muted)"
+            strokeWidth="1"
+            strokeDasharray="2 4"
+            opacity="0.45"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
+        </>
+      ) : (
+        <path
+          d={`M ${cairoX + cairoW - 4} ${rowY + 52} Q ${(cairoX + cairoW + luxorX) / 2} ${rowY + 34} ${luxorX + 6} ${rowY + 54}`}
+          fill="none"
+          stroke="var(--stick-accent)"
+          strokeWidth="1.4"
+          strokeDasharray="4 5"
+          opacity="0.5"
+        />
+      )}
+      <text
+        x={(cairoX + cairoW + luxorX) / 2}
+        y={rowY + 22}
+        textAnchor="middle"
+        className="stick-svg-label"
+        fontSize="6"
+        fill="var(--stick-muted)"
+      >
+        calling Luxor…
+      </text>
+
+      {/* Luxor — supermarkets row, evenly spaced */}
+      <rect
+        x={luxorX}
+        y={rowY}
+        width={luxorW}
+        height={rowH}
+        rx="12"
+        fill="#fdf6f0"
+        stroke="var(--stick-stroke)"
+        strokeWidth="2"
+      />
+      <text
+        x={luxorX + luxorW / 2}
+        y={rowY + 18}
+        textAnchor="middle"
+        className="stick-svg-label"
+        fontSize="9"
+        fontWeight="700"
+        fill="var(--stick-muted)"
+      >
+        Luxor · supermarkets
+      </text>
+      <text
+        x={luxorX + luxorW / 2}
+        y={rowY + 30}
+        textAnchor="middle"
+        className="stick-svg-label"
+        fontSize="6"
+        fill="var(--stick-muted)"
+      >
+        every single one
+      </text>
+
+      {storeXs.map((sx, i) => (
+        <g key={i} transform={`translate(${sx}, ${shopYs})`}>
+          <path
+            d={`M 0 0 L ${shopW} 0 L ${shopW - 2} 11 L 0 11 Z`}
+            fill={i % 2 === 0 ? '#c76b88' : '#fff'}
+            stroke="var(--stick-stroke)"
+            strokeWidth="1.2"
+          />
+          <rect x="0" y="11" width={shopW} height="28" rx="2" fill="#f5ebe3" stroke="var(--stick-stroke)" strokeWidth="1.2" />
+          <rect x="12" y="20" width="12" height="15" fill="#6b5b4a" opacity="0.35" />
+          {i !== winIndex ? (
+            <text x="10" y="30" className="stick-svg-label" fontSize="16" fontWeight="700" fill="#c44">
+              ×
+            </text>
+          ) : null}
+        </g>
+      ))}
+
+      <motion.g
+        filter="url(#palitosWinGlow)"
+        animate={reduce ? undefined : { scale: [1, 1.05, 1] }}
+        transition={{ duration: 1.6, repeat: Infinity }}
+        style={{ transformOrigin: `${winCx}px ${shopYs + 20}px` }}
+      >
+        <rect
+          x={winCx - 16}
+          y={shopYs + 2}
+          width="32"
+          height="22"
+          rx="3"
+          fill="url(#palitosBagGrad)"
+          stroke="var(--stick-stroke)"
+          strokeWidth="1.6"
+        />
+        <line x1={winCx - 11} y1={shopYs + 8} x2={winCx + 11} y2={shopYs + 8} stroke="#fff" strokeWidth="1.3" opacity="0.65" />
+        <line x1={winCx - 11} y1={shopYs + 13} x2={winCx + 9} y2={shopYs + 13} stroke="#fff" strokeWidth="1.2" opacity="0.45" />
+        <text
+          x={winCx}
+          y={shopYs + 38}
+          textAnchor="middle"
+          className="stick-svg-label"
+          fontSize="6"
+          fontWeight="700"
+          fill="#8b4513"
+        >
+          PALITOS
+        </text>
+        <text
+          x={winCx}
+          y={shopYs + 46}
+          textAnchor="middle"
+          className="stick-svg-label"
+          fontSize="5"
+          fill="#2d7a3e"
+          fontWeight="700"
+        >
+          FOUND
+        </text>
+        {!reduce
+          ? ['✦', '★', '✧'].map((sym, si) => {
+              const starY = shopYs - 4
+              return (
+                <motion.text
+                  key={si}
+                  x={winCx - 14 + si * 14}
+                  y={starY}
+                  textAnchor="middle"
+                  className="stick-svg-label"
+                  fontSize="9"
+                  fill="var(--stick-gold)"
+                  initial={false}
+                  animate={{ opacity: [0.5, 1, 0.5], y: [starY, starY - 6, starY] }}
+                  transition={{ duration: 1.4, repeat: Infinity, delay: si * 0.12 }}
+                >
+                  {sym}
+                </motion.text>
+              )
+            })
+          : null}
+      </motion.g>
+
+      {/* Delivery: path from win shop → Roro; van follows arc */}
+      <path
+        d={`M ${winCx} ${rowY + rowH + 4} Q ${(winCx + 268) / 2} ${rowY + rowH + 36} 258 198`}
+        fill="none"
+        stroke="var(--stick-path)"
+        strokeWidth="2"
+        strokeDasharray="6 5"
+        opacity="0.85"
+      />
+      <text x="200" y={rowY + rowH + 28} textAnchor="middle" className="stick-svg-label" fontSize="7" fill="var(--stick-muted)">
+        delivered
+      </text>
+      <motion.g
+        animate={
+          reduce
+            ? undefined
+            : {
+                x: [0, 26, 52, 78],
+                y: [0, 8, 16, 24],
+              }
+        }
+        transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <g transform={`translate(${winCx - 11}, ${rowY + rowH - 6})`}>
+          <rect x="0" y="0" width="24" height="15" rx="3" fill="#6b9ed4" stroke="var(--stick-stroke)" strokeWidth="1.2" />
+          <circle cx="7" cy="17" r="4" fill="#2d2d33" />
+          <circle cx="18" cy="17" r="4" fill="#2d2d33" />
+          <rect x="12" y="2" width="10" height="8" rx="1" fill="url(#palitosBagGrad)" stroke="var(--stick-stroke)" strokeWidth="0.8" />
+        </g>
+      </motion.g>
+
+      {/* Roro — bottom right, clear margin */}
+      <g transform="translate(238, 176)">
+        {['✦', '★', '✧', '★', '✦'].map((sym, si) => (
+          <motion.text
+            key={si}
+            x={-8 + si * 10}
+            y={-14 + (si % 2) * 5}
+            textAnchor="middle"
+            className="stick-svg-label"
+            fontSize="9"
+            fill="var(--stick-gold)"
+            initial={false}
+            animate={reduce ? undefined : { opacity: [0.45, 1, 0.45], y: [-14 + (si % 2) * 5, -20 + (si % 2) * 5, -14 + (si % 2) * 5] }}
+            transition={{ duration: 1.5 + si * 0.08, repeat: Infinity, delay: si * 0.07 }}
+          >
+            {sym}
+          </motion.text>
+        ))}
+        <motion.g
+          animate={reduce ? undefined : { rotate: [-2.5, 2.5, -2.5] }}
+          transition={{ duration: 0.55, repeat: Infinity }}
+          style={{ transformOrigin: '14px 44px' }}
+        >
+          <StickPerson x={14} y={64} happy blush scale={0.92} flip />
+          <rect x="2" y="6" width="22" height="30" rx="3" fill="url(#palitosBagGrad)" stroke="var(--stick-stroke)" strokeWidth="1.8" />
+          <line x1="6" y1="13" x2="20" y2="13" stroke="#fff" strokeWidth="1.5" opacity="0.75" />
+          <line x1="6" y1="19" x2="18" y2="19" stroke="#fff" strokeWidth="1.5" opacity="0.55" />
+          <text x="7" y="30" className="stick-svg-label" fontSize="5" fontWeight="700" fill="#5c3d1a">
+            PALITOS
+          </text>
+        </motion.g>
+      </g>
+
+      <text
+        x="160"
+        y="268"
+        textAnchor="middle"
+        className="stick-svg-label"
+        fontSize="9"
+        fontWeight="600"
+        fill="var(--rose-deep)"
+      >
+        her joy = my joy
       </text>
     </>
   )

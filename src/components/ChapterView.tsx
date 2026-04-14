@@ -7,11 +7,16 @@ import { StaggeredChapterText } from './StaggeredChapterText'
 import { ProgressDots } from './ProgressDots'
 import { MascotDog } from './MascotDog'
 import { FloatingHearts } from './FloatingHearts'
+import { RoroGuessGame } from './RoroGuessGame'
 
 const TOTAL_STEPS = chapters.length + 1
 
 function sceneHasFloatingHearts(scene: Chapter['scene'] | undefined) {
-  return scene === 'flowers_cairo_luxor' || scene === 'family_approved'
+  return (
+    scene === 'flowers_cairo_luxor' ||
+    scene === 'family_approved' ||
+    scene === 'palitos_luxor_quest'
+  )
 }
 
 export function ChapterView() {
@@ -289,6 +294,12 @@ function OutroPanel({ reduce }: { reduce: boolean }) {
               </motion.div>
             ) : null}
           </AnimatePresence>
+
+          {phase === 'real' ? (
+            <div className="outro-after-letter">
+              <RoroGuessGame />
+            </div>
+          ) : null}
         </div>
       </div>
     </motion.div>

@@ -359,6 +359,10 @@ body {
   display: block;
 }
 
+.stick-scene--palitos_luxor_quest .stick-svg {
+  max-height: 290px;
+}
+
 .stick-svg-label {
   font-family: var(--font-body);
   font-weight: 600;
@@ -632,6 +636,176 @@ body {
 
 .outro-photo-wrap--after-letter {
   margin-top: 1.35rem;
+}
+
+.outro-after-letter {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed rgba(199, 107, 136, 0.35);
+}
+
+.roro-game-section {
+  width: 100%;
+  max-width: 26rem;
+  margin: 0 auto;
+}
+
+.roro-game-launch {
+  width: 100%;
+  flex-wrap: wrap;
+  white-space: normal;
+  line-height: 1.35;
+}
+
+.roro-game-launch-emoji {
+  font-size: 1.15rem;
+}
+
+.roro-game-card {
+  text-align: left;
+  padding: 1rem 1rem 1.25rem;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #fff 0%, #fff8fb 100%);
+  border: 2px solid rgba(232, 160, 180, 0.5);
+  box-shadow: 0 12px 36px rgba(139, 58, 82, 0.1);
+}
+
+.roro-game-illustration-wrap {
+  width: 100%;
+  margin: 0 0 0.75rem;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #fffafd 0%, #f5f0ff22 50%, #fff5f8 100%);
+  border: 1px solid rgba(232, 160, 180, 0.35);
+}
+
+.roro-game-illustration-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 220px;
+}
+
+.roro-game-svg-text {
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.roro-game-svg-caption {
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.roro-game-prompt {
+  margin: 0 0 0.65rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.roro-game-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.roro-game-option {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  border: 2px solid rgba(199, 107, 136, 0.35);
+  background: #fff;
+  font-family: 'Cairo', 'Noto Sans Arabic', var(--font-body), sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  text-align: right;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.roro-game-option:hover:not(:disabled) {
+  border-color: var(--rose-deep);
+  background: #fff5f8;
+}
+
+.roro-game-option:disabled {
+  cursor: default;
+  opacity: 0.85;
+}
+
+.roro-game-option--wrong {
+  border-color: #c44;
+  background: #fff5f5;
+}
+
+.roro-game-option--confirmed {
+  border-color: #2d7a3e;
+  background: #f0faf2;
+  box-shadow: 0 0 0 3px rgba(45, 122, 62, 0.2);
+}
+
+.roro-game-option-num {
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(199, 107, 136, 0.15);
+  font-weight: 700;
+  color: var(--burgundy);
+}
+
+.roro-game-option--confirmed .roro-game-option-num {
+  background: rgba(45, 122, 62, 0.2);
+  color: #1e5c2d;
+}
+
+.roro-game-option-text {
+  flex: 1;
+}
+
+.roro-game-feedback {
+  margin: 0.5rem 0 0;
+  text-align: center;
+}
+
+.roro-game-feedback--wrong {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #b33;
+}
+
+.roro-game-feedback--win {
+  margin-top: 0.75rem;
+  padding: 0.85rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #fff5f8, #ffe8ef);
+  border: 2px solid var(--rose-deep);
+}
+
+.roro-game-win-title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--burgundy);
+}
+
+.roro-game-win-sub {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-soft);
+  line-height: 1.45;
+}
+
+.roro-game-reset {
+  margin-top: 0.75rem;
+  width: 100%;
 }
 
 .outro-photo {

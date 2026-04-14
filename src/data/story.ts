@@ -8,6 +8,7 @@ export type SceneKey =
   | 'family_approved'
   | 'first_gold_gram'
   | 'talked_to_father'
+  | 'palitos_luxor_quest'
 
 export type Chapter = {
   id: string
@@ -112,6 +113,18 @@ export const chapters: Chapter[] = [
     mascotLine: 'Officially: family-approved crush upgraded to family-approved love.',
   },
   {
+    id: 'march27',
+    dateLabel: '27 March 2026',
+    title: 'I talked to your father',
+    body: [
+      'On 27 March I talked to your father — properly, respectfully, heart in my throat.',
+      'I wanted him to hear who I am, how I care about you, and that I’m serious.',
+      'That conversation mattered to me more than almost any meeting I’ve ever had.',
+    ],
+    scene: 'talked_to_father',
+    mascotLine: 'Respect mode: ON. Dad chat survived. Legend.',
+  },
+  {
     id: 'april3',
     dateLabel: '3 April 2026',
     title: 'Our first gram of gold',
@@ -124,16 +137,16 @@ export const chapters: Chapter[] = [
     mascotLine: 'Investment portfolio: 1g gold + infinite chaos. Solid.',
   },
   {
-    id: 'april10',
-    dateLabel: '10 April 2026',
-    title: 'I talked to your father',
+    id: 'april9',
+    dateLabel: '9 April 2026',
+    title: 'The Palitos mission',
     body: [
-      'On 10 April I talked to your father — properly, respectfully, heart in my throat.',
-      'I wanted him to hear who I am, how I care about you, and that I’m serious.',
-      'That conversation mattered to me more than almost any meeting I’ve ever had.',
+      'Out of nowhere you said you wished you had Palitos — that snack you love and can never find.',
+      'I was in Cairo. You were in Luxor. So I called supermarket after supermarket across Luxor until someone finally had them.',
+      'I got them to you. You were so, so, so happy — and seeing you like that made me happier than the snack ever could.',
     ],
-    scene: 'talked_to_father',
-    mascotLine: 'Respect mode: ON. Dad chat survived. Legend.',
+    scene: 'palitos_luxor_quest',
+    mascotLine: 'Detective dog rating this case: 14/10. Snack acquired. Tail velocity: illegal.',
   },
 ]
 
