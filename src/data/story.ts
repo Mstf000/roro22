@@ -9,6 +9,7 @@ export type SceneKey =
   | 'first_gold_gram'
   | 'talked_to_father'
   | 'palitos_luxor_quest'
+  | 'dress_april_love'
 
 export type Chapter = {
   id: string
@@ -147,6 +148,18 @@ export const chapters: Chapter[] = [
     ],
     scene: 'palitos_luxor_quest',
     mascotLine: 'Detective dog rating this case: 14/10. Snack acquired. Tail velocity: illegal.',
+  },
+  {
+    id: 'april15',
+    dateLabel: '15 April 2026',
+    title: 'The dress I didn’t get — at first',
+    body: [
+      'You fell in love with a dress style that just wasn’t my taste — and I kept saying no, again and again.',
+      'You got upset, and I hated that I made you feel wrong for wanting to feel pretty.',
+      'I came around: what matters isn’t my opinion on the fabric — it’s you feeling good in your own skin. I want you happy, confident, and glowing — wear what makes you feel like you.',
+    ],
+    scene: 'dress_april_love',
+    mascotLine: 'Moral of the story: her smile > my stubbornness. Always.',
   },
 ]
 

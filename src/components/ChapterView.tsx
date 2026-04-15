@@ -15,7 +15,8 @@ function sceneHasFloatingHearts(scene: Chapter['scene'] | undefined) {
   return (
     scene === 'flowers_cairo_luxor' ||
     scene === 'family_approved' ||
-    scene === 'palitos_luxor_quest'
+    scene === 'palitos_luxor_quest' ||
+    scene === 'dress_april_love'
   )
 }
 

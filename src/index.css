@@ -363,6 +363,10 @@ body {
   max-height: 290px;
 }
 
+.stick-scene--dress_april_love .stick-svg {
+  max-height: 300px;
+}
+
 .stick-svg-label {
   font-family: var(--font-body);
   font-weight: 600;

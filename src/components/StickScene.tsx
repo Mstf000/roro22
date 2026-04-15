@@ -10,7 +10,11 @@ export function StickScene({ scene }: Props) {
     <div className={`stick-scene stick-scene--${scene}`}>
       <svg
         viewBox={
-          scene === 'palitos_luxor_quest' ? '0 0 320 278' : '0 0 320 260'
+          scene === 'palitos_luxor_quest'
+            ? '0 0 320 278'
+            : scene === 'dress_april_love'
+              ? '0 0 320 288'
+              : '0 0 320 260'
         }
         className="stick-svg"
         role="img"
@@ -65,6 +69,9 @@ export function StickScene({ scene }: Props) {
         )}
         {scene === 'palitos_luxor_quest' && (
           <PalitosLuxorQuestScene reduce={reduce} />
+        )}
+        {scene === 'dress_april_love' && (
+          <DressAprilLoveScene reduce={reduce} />
         )}
       </svg>
     </div>
@@ -809,6 +816,232 @@ function PalitosLuxorQuestScene({ reduce }: { reduce: boolean }) {
         fill="var(--rose-deep)"
       >
         her joy = my joy
+      </text>
+    </>
+  )
+}
+
+function DressAprilLoveScene({ reduce }: { reduce: boolean }) {
+  return (
+    <>
+      <defs>
+        <linearGradient id="dress_april_coolPanel" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#dbe8f2" />
+          <stop offset="100%" stopColor="#b8cce0" />
+        </linearGradient>
+        <linearGradient id="dress_april_warmPanel" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#fff8fb" />
+          <stop offset="100%" stopColor="#ffc8dc" />
+        </linearGradient>
+        <linearGradient id="dress_april_frilly" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#e8a8c8" />
+          <stop offset="45%" stopColor="#f8d0e4" />
+          <stop offset="100%" stopColor="#c97aa8" />
+        </linearGradient>
+        <linearGradient id="dress_april_frillyHappy" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#ffb8d8" />
+          <stop offset="100%" stopColor="#e86ba5" />
+        </linearGradient>
+      </defs>
+
+      <text
+        x="160"
+        y="28"
+        textAnchor="middle"
+        className="stick-svg-label"
+        fontSize="11"
+        fontWeight="700"
+        fill="var(--rose-deep)"
+      >
+        15 April 2026 · the dress
+      </text>
+
+      <rect
+        x="8"
+        y="38"
+        width="132"
+        height="208"
+        rx="16"
+        fill="url(#dress_april_coolPanel)"
+        stroke="#7a9ab8"
+        strokeWidth="2"
+      />
+      <text
+        x="74"
+        y="56"
+        textAnchor="middle"
+        className="stick-svg-label"
+        fontSize="7.5"
+        fontWeight="700"
+        fill="#4a5f78"
+      >
+        “not that style…”
+      </text>
+
+      <rect
+        x="180"
+        y="38"
+        width="132"
+        height="208"
+        rx="16"
+        fill="url(#dress_april_warmPanel)"
+        stroke="#d8789a"
+        strokeWidth="2"
+      />
+      <text
+        x="246"
+        y="56"
+        textAnchor="middle"
+        className="stick-svg-label"
+        fontSize="7.5"
+        fontWeight="700"
+        fill="var(--rose-deep)"
+      >
+        “you shine in it”
+      </text>
+
+      <motion.g
+        transform="translate(160, 152)"
+        animate={reduce ? undefined : { scale: [1, 1.06, 1] }}
+        transition={{ duration: 1.35, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ transformOrigin: '0px 0px' }}
+      >
+        <path
+          d="M0,14 C-18,-6 -28,-18 0,-32 C28,-18 18,-6 0,14 Z"
+          fill="var(--rose-soft)"
+          stroke="var(--rose-deep)"
+          strokeWidth="2"
+          filter="url(#softGlow)"
+          opacity="0.92"
+        />
+      </motion.g>
+      <text
+        x="160"
+        y="168"
+        textAnchor="middle"
+        className="stick-svg-label"
+        fontSize="6.5"
+        fontWeight="700"
+        fill="var(--rose-deep)"
+        opacity="0.85"
+      >
+        love wins
+      </text>
+
+      <g transform="translate(52, 188)">
+        <StickPerson x={0} y={0} scale={0.95} />
+        <ellipse cx="-18" cy="-36" rx="11" ry="9" fill="url(#dress_april_frilly)" stroke="var(--stick-stroke)" strokeWidth="1.6" />
+        <ellipse cx="18" cy="-36" rx="11" ry="9" fill="url(#dress_april_frilly)" stroke="var(--stick-stroke)" strokeWidth="1.6" />
+        <path
+          d="M-10,-14 L-38,48 Q-22,58 0,52 Q22,58 38,48 L10,-14 Q0,-22 -10,-14 Z"
+          fill="url(#dress_april_frilly)"
+          stroke="var(--stick-stroke)"
+          strokeWidth="2"
+        />
+        <path
+          d="M-30,42 Q-14,50 0,46 Q14,50 30,42"
+          fill="none"
+          stroke="var(--stick-stroke)"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          opacity="0.5"
+        />
+        {!reduce && (
+          <motion.g
+            animate={{ opacity: [0.5, 1, 0.5], x: [0, 1.5, 0] }}
+            transition={{ duration: 0.9, repeat: Infinity }}
+          >
+            <path d="M-28,-58 L-22,-50 M-25,-54 L-23,-58" stroke="#c45a6a" strokeWidth="2" strokeLinecap="round" />
+            <path d="M-34,-52 L-26,-46" stroke="#c45a6a" strokeWidth="1.8" strokeLinecap="round" />
+          </motion.g>
+        )}
+      </g>
+      <g transform="translate(112, 188)">
+        <StickPerson x={0} y={0} flip scale={0.95} />
+      </g>
+      <rect
+        x="18"
+        y="68"
+        width="72"
+        height="22"
+        rx="8"
+        fill="#fff"
+        stroke="var(--stick-stroke)"
+        strokeWidth="1.4"
+        opacity="0.92"
+      />
+      <text x="54" y="82" textAnchor="middle" className="stick-svg-label" fontSize="6.5" fill="#3d4d5c">
+        no… not that
+      </text>
+
+      <g transform="translate(248, 188)">
+        <motion.g
+          animate={reduce ? undefined : { rotate: [-5, 5, -5] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ transformOrigin: '0px -36px' }}
+        >
+          <StickPerson x={0} y={0} happy blush scale={0.95} />
+          <ellipse cx="-18" cy="-36" rx="11" ry="9" fill="url(#dress_april_frillyHappy)" stroke="var(--rose-deep)" strokeWidth="1.8" />
+          <ellipse cx="18" cy="-36" rx="11" ry="9" fill="url(#dress_april_frillyHappy)" stroke="var(--rose-deep)" strokeWidth="1.8" />
+          <path
+            d="M-10,-14 L-38,48 Q-22,58 0,52 Q22,58 38,48 L10,-14 Q0,-22 -10,-14 Z"
+            fill="url(#dress_april_frillyHappy)"
+            stroke="var(--rose-deep)"
+            strokeWidth="2.2"
+            filter="url(#softGlow)"
+          />
+          <path
+            d="M-30,42 Q-14,50 0,46 Q14,50 30,42"
+            fill="none"
+            stroke="var(--rose-deep)"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            opacity="0.45"
+          />
+        </motion.g>
+      </g>
+      <g transform="translate(198, 188)">
+        <StickPerson x={0} y={0} flip happy blush scale={0.95} />
+      </g>
+      <rect
+        x="198"
+        y="68"
+        width="96"
+        height="26"
+        rx="10"
+        fill="#fff"
+        stroke="var(--rose-deep)"
+        strokeWidth="1.6"
+        opacity="0.95"
+      />
+      <text x="246" y="85" textAnchor="middle" className="stick-svg-label" fontSize="6.5" fontWeight="700" fill="var(--rose-deep)">
+        wear what feels like you
+      </text>
+
+      {[0, 1, 2, 3].map((i) => (
+        <motion.path
+          key={i}
+          d="M0,3 C-4,-2 -6,-5 0,-8 C6,-5 4,-2 0,3 Z"
+          fill="var(--rose-soft)"
+          stroke="var(--rose-deep)"
+          strokeWidth="0.8"
+          transform={`translate(${210 + i * 14}, ${118 + (i % 2) * 8}) scale(0.85)`}
+          initial={false}
+          animate={reduce ? undefined : { y: [0, -10, 0], opacity: [0.35, 1, 0.35] }}
+          transition={{ duration: 1.6 + i * 0.12, repeat: Infinity, delay: i * 0.15 }}
+        />
+      ))}
+
+      <text
+        x="160"
+        y="278"
+        textAnchor="middle"
+        className="stick-svg-label"
+        fontSize="8.5"
+        fontWeight="600"
+        fill="var(--rose-deep)"
+      >
+        her looking good &amp; happy = everything
       </text>
     </>
   )
