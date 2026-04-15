@@ -73,6 +73,9 @@ export function StickScene({ scene }: Props) {
         {scene === 'dress_april_love' && (
           <DressAprilLoveScene reduce={reduce} />
         )}
+        {scene === 'late_night_calls' && (
+          <LateNightCallsScene reduce={reduce} />
+        )}
       </svg>
     </div>
   )
@@ -1042,6 +1045,162 @@ function DressAprilLoveScene({ reduce }: { reduce: boolean }) {
         fill="var(--rose-deep)"
       >
         her looking good &amp; happy = everything
+      </text>
+    </>
+  )
+}
+
+function LateNightCallsScene({ reduce }: { reduce: boolean }) {
+  return (
+    <>
+      <defs>
+        <linearGradient id="lateNightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#1c1f3a" />
+          <stop offset="55%" stopColor="#2a2850" />
+          <stop offset="100%" stopColor="#15182c" />
+        </linearGradient>
+        <radialGradient id="lateNightMoonGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#fff9e6" stopOpacity="0.95" />
+          <stop offset="70%" stopColor="#fff4cc" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#fff4cc" stopOpacity="0" />
+        </radialGradient>
+        <radialGradient id="lateNightWindow" cx="50%" cy="80%" r="75%">
+          <stop offset="0%" stopColor="#ffe8b8" stopOpacity="0.95" />
+          <stop offset="100%" stopColor="#c98a4a" stopOpacity="0.25" />
+        </radialGradient>
+      </defs>
+
+      <rect x="0" y="0" width="320" height="260" fill="url(#lateNightSky)" />
+
+      {[12, 48, 92, 130, 178, 220, 265, 300].map((sx, i) => (
+        <motion.circle
+          key={sx}
+          cx={sx}
+          cy={28 + (i * 17) % 44}
+          r={i % 3 === 0 ? 1.4 : 0.9}
+          fill="#fff"
+          opacity={0.5}
+          initial={false}
+          animate={reduce ? undefined : { opacity: [0.25, 0.95, 0.25] }}
+          transition={{ duration: 1.8 + i * 0.15, repeat: Infinity, delay: i * 0.12 }}
+        />
+      ))}
+
+      <motion.g
+        transform="translate(268, 42)"
+        animate={reduce ? undefined : { y: [0, -2, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <circle cx="0" cy="0" r="22" fill="url(#lateNightMoonGlow)" opacity="0.85" />
+        <path
+          d="M4,-8 A18,18 0 1,1 4,8 A14,14 0 1,0 4,-8 Z"
+          fill="#f5f0d8"
+          stroke="#e8dfc4"
+          strokeWidth="1"
+        />
+      </motion.g>
+
+      <text
+        x="160"
+        y="26"
+        textAnchor="middle"
+        className="stick-svg-label"
+        fontSize="10"
+        fontWeight="700"
+        fill="#d4c8f0"
+      >
+        all night · all day · still talking
+      </text>
+
+      <rect x="0" y="198" width="320" height="62" fill="#0d0f18" opacity="0.92" />
+      <rect x="0" y="198" width="320" height="4" fill="#1e2438" opacity="0.8" />
+
+      <g transform="translate(38, 88)">
+        <rect x="0" y="0" width="100" height="118" rx="10" fill="#2a2038" stroke="#5c4a6e" strokeWidth="2" />
+        <rect x="8" y="10" width="84" height="98" rx="6" fill="url(#lateNightWindow)" opacity="0.92" />
+        <line x1="50" y1="10" x2="50" y2="108" stroke="#4a3d52" strokeWidth="1.2" opacity="0.5" />
+        <line x1="8" y1="59" x2="92" y2="59" stroke="#4a3d52" strokeWidth="1.2" opacity="0.5" />
+        <StickPerson x={50} y={76} happy phone blush scale={0.88} />
+        <text
+          x="50"
+          y="114"
+          textAnchor="middle"
+          className="stick-svg-label"
+          fontSize="8.5"
+          fontWeight="800"
+          letterSpacing="0.12em"
+          fill="#c4b8dc"
+        >
+          TFTF
+        </text>
+      </g>
+
+      <g transform="translate(182, 88)">
+        <rect x="0" y="0" width="100" height="118" rx="10" fill="#2a2038" stroke="#5c4a6e" strokeWidth="2" />
+        <rect x="8" y="10" width="84" height="98" rx="6" fill="url(#lateNightWindow)" opacity="0.92" />
+        <line x1="50" y1="10" x2="50" y2="108" stroke="#4a3d52" strokeWidth="1.2" opacity="0.5" />
+        <line x1="8" y1="59" x2="92" y2="59" stroke="#4a3d52" strokeWidth="1.2" opacity="0.5" />
+        <StickPerson x={50} y={76} happy phone blush scale={0.88} flip />
+        <text
+          x="50"
+          y="114"
+          textAnchor="middle"
+          className="stick-svg-label"
+          fontSize="8.5"
+          fontWeight="800"
+          letterSpacing="0.1em"
+          fill="#f0b8d8"
+        >
+          RORO
+        </text>
+      </g>
+
+      <motion.path
+        d="M138 118 Q160 88 182 118"
+        fill="none"
+        stroke="#f0b8d8"
+        strokeWidth="2"
+        strokeDasharray="5 6"
+        strokeLinecap="round"
+        opacity="0.75"
+        initial={false}
+        animate={reduce ? undefined : { strokeDashoffset: [0, -22] }}
+        transition={{ duration: 2.2, repeat: Infinity, ease: 'linear' }}
+      />
+      <motion.path
+        d="M138 132 Q160 158 182 132"
+        fill="none"
+        stroke="#b8c4f0"
+        strokeWidth="1.8"
+        strokeDasharray="4 7"
+        strokeLinecap="round"
+        opacity="0.55"
+        initial={false}
+        animate={reduce ? undefined : { strokeDashoffset: [0, 22] }}
+        transition={{ duration: 2.8, repeat: Infinity, ease: 'linear' }}
+      />
+
+      <rect x="132" y="44" width="56" height="22" rx="8" fill="#1a1530" stroke="#6a5a8a" strokeWidth="1.4" opacity="0.95" />
+      <text x="160" y="59" textAnchor="middle" className="stick-svg-label" fontSize="9" fontWeight="700" fill="#c8b8e8">
+        2:47 ☾
+      </text>
+
+      <motion.rect
+        x="88"
+        y="210"
+        width="144"
+        height="28"
+        rx="12"
+        fill="#2a1f45"
+        stroke="#e8a0c8"
+        strokeWidth="1.6"
+        opacity="0.92"
+        initial={false}
+        animate={reduce ? undefined : { opacity: [0.75, 1, 0.75] }}
+        transition={{ duration: 2.5, repeat: Infinity }}
+      />
+      <text x="160" y="228" textAnchor="middle" className="stick-svg-label" fontSize="9" fontWeight="700" fill="#ffd6ea">
+        I love you · حبق
       </text>
     </>
   )

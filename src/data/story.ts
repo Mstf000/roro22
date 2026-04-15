@@ -10,6 +10,7 @@ export type SceneKey =
   | 'talked_to_father'
   | 'palitos_luxor_quest'
   | 'dress_april_love'
+  | 'late_night_calls'
 
 export type Chapter = {
   id: string
@@ -160,6 +161,20 @@ export const chapters: Chapter[] = [
     ],
     scene: 'dress_april_love',
     mascotLine: 'Moral of the story: her smile > my stubbornness. Always.',
+  },
+  {
+    id: 'always_calls',
+    dateLabel: 'Not one day on the calendar — always',
+    title: 'Late-night calls are amazing',
+    contextTag: 'Whenever we’re both awake · day or night',
+    contextIcon: '🌙',
+    body: [
+      'Late-night calls with you are amazing — the kind that ignores the clock and still feels like the best part of the day.',
+      'We talk all day and we talk all night; whenever we’re awake together, we’re on that line — stories, silence, laughter, everything. It never gets old.',
+      'I love you. حبق.',
+    ],
+    scene: 'late_night_calls',
+    mascotLine: 'Sleep is optional. Your voice is not. (Worth it.)',
   },
 ]
 
