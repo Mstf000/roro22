@@ -8,6 +8,8 @@ import { ProgressDots } from './ProgressDots'
 import { MascotDog } from './MascotDog'
 import { FloatingHearts } from './FloatingHearts'
 import { RoroGuessGame } from './RoroGuessGame'
+import { RoroDarknessGame } from './RoroDarknessGame'
+import { JuiceMomentHint } from './JuiceMomentHint'
 
 const TOTAL_STEPS = chapters.length + 1
 
@@ -17,6 +19,10 @@ function sceneHasFloatingHearts(scene: Chapter['scene'] | undefined) {
     scene === 'family_approved' ||
     scene === 'palitos_luxor_quest' ||
     scene === 'dress_april_love' ||
+    scene === 'dad_call_agreement' ||
+    scene === 'hundred_i_love_yous' ||
+    scene === 'salon_juice_moment' ||
+    scene === 'salon_day_two' ||
     scene === 'late_night_calls'
   )
 }
@@ -24,6 +30,7 @@ function sceneHasFloatingHearts(scene: Chapter['scene'] | undefined) {
 export function ChapterView() {
   const [index, setIndex] = useState(0)
   const [heartsKey, setHeartsKey] = useState(0)
+  const [darknessGameOpen, setDarknessGameOpen] = useState(false)
   const reduce = useReducedMotion() ?? false
   const isOutro = index >= chapters.length
   const chapter: Chapter | null = isOutro ? null : chapters[index]!
@@ -51,6 +58,16 @@ export function ChapterView() {
 
   return (
     <div className={`story-shell${themeCool ? ' story-shell--cool' : ''}`}>
+      <button
+        type="button"
+        className="roro-note-launch"
+        onClick={() => setDarknessGameOpen(true)}
+        aria-label="Open a short note for Roro"
+      >
+        <span className="roro-note-launch__glyph" aria-hidden />
+      </button>
+      <RoroDarknessGame open={darknessGameOpen} onClose={() => setDarknessGameOpen(false)} />
+
       <ProgressDots total={TOTAL_STEPS} current={index} />
 
       <div className="story-stage">
@@ -80,6 +97,7 @@ export function ChapterView() {
                   contextTag={chapter!.contextTag}
                   contextIcon={chapter!.contextIcon}
                 />
+                {chapter!.id === 'april30' && <JuiceMomentHint />}
               </div>
             </motion.div>
           )}

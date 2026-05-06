@@ -10,6 +10,10 @@ export type SceneKey =
   | 'talked_to_father'
   | 'palitos_luxor_quest'
   | 'dress_april_love'
+  | 'dad_call_agreement'
+  | 'hundred_i_love_yous'
+  | 'salon_juice_moment'
+  | 'salon_day_two'
   | 'late_night_calls'
 
 export type Chapter = {
@@ -161,6 +165,62 @@ export const chapters: Chapter[] = [
     ],
     scene: 'dress_april_love',
     mascotLine: 'Moral of the story: her smile > my stubbornness. Always.',
+  },
+  {
+    id: 'april20',
+    dateLabel: '20 April 2026',
+    title: "Her dad called me",
+    body: [
+      "Out of nowhere, Roro's dad called me — and I felt my heart jump into my throat.",
+      'We talked, really talked. He wanted to get to know me, and I made sure he knew I was serious about his daughter.',
+      'We agreed to meet face-to-face on 30 April. Me and Roro were completely over the moon — like, actually jumping.',
+    ],
+    scene: 'dad_call_agreement',
+    mascotLine: 'Dad called. Legend move. 30/4 circled on the calendar. We\'re SO doing this.',
+    contextTag: 'A phone call that changed everything',
+    contextIcon: '📞',
+  },
+  {
+    id: 'april22',
+    dateLabel: '22 April 2026',
+    title: 'I love you × 100',
+    body: [
+      'On this call I said I love you. Then again. Then again. More than a hundred times — and I meant it every single one.',
+      'I was melting. Literally melting into the phone, into your voice, into every single thing you are.',
+      "I don't think I've ever felt that dissolved in a feeling before. You do something to me, Roro. Something no one else has ever done.",
+    ],
+    scene: 'hundred_i_love_yous',
+    mascotLine: 'I love you count: 100+. Structural integrity: gone. Heart: completely full.',
+    contextTag: 'On a call · completely gone for you',
+    contextIcon: '💕',
+  },
+  {
+    id: 'april30',
+    dateLabel: '30 April 2026',
+    title: 'FINALLY inside the salon',
+    body: [
+      "We agreed to meet — and there I was, actually sitting inside their salon, with her dad across from me. I couldn't believe it was really happening.",
+      'Then Roro walked in with a glass of orange juice. She looked a little tense — you could tell she was nervous. When she reached out to hand it to me, I said "تسلم ايدك" without thinking.',
+      "She froze. Said nothing. xDDD Then kept apologising: \"sorry I didn't know what to say.\" I love her so much for that moment.",
+    ],
+    scene: 'salon_juice_moment',
+    mascotLine: '"تسلم ايدك" → complete silence → sorry sorry sorry. Iconic.',
+    contextTag: 'In their salon · meeting Baba',
+    contextIcon: '🍊',
+  },
+  {
+    id: 'may1',
+    dateLabel: '1 May 2026',
+    title: 'Back again — best day ever',
+    body: [
+      'I came back the next day. We had the absolute best time — talking nonstop, sneaking hugs, stealing kisses without her dad catching us. We were completely unstoppable.',
+      'And then Hazem — her little brother — quietly watched us holding hands from across the room… looked us dead in the eyes… and went: "انتوا عاملين تحالف؟"',
+      "xDDDDD. I still lose it every time I think about that. We were caught by a child and we had no defence. None.",
+    ],
+    scene: 'salon_day_two',
+    mascotLine: 'Hazem: "انتوا عاملين تحالف؟" — kid cracked the case wide open. Detective of the year.',
+    contextTag: 'Day 2 · salon · Hazem watching',
+    contextIcon: '🤝',
   },
   {
     id: 'always_calls',

@@ -4,7 +4,7 @@ export function getExpectedPassphrase(): string {
   if (fromEnv && String(fromEnv).trim() !== '') {
     return String(fromEnv).trim()
   }
-  return 'roro-and-mstf'
+  return 'ahyahbb'
 }
 
 export const STORAGE_REMEMBER_KEY = 'roro_story_remember'

@@ -73,6 +73,18 @@ export function StickScene({ scene }: Props) {
         {scene === 'dress_april_love' && (
           <DressAprilLoveScene reduce={reduce} />
         )}
+        {scene === 'dad_call_agreement' && (
+          <DadCallAgreementScene reduce={reduce} />
+        )}
+        {scene === 'hundred_i_love_yous' && (
+          <HundredILoveYousScene reduce={reduce} />
+        )}
+        {scene === 'salon_juice_moment' && (
+          <SalonJuiceMomentScene reduce={reduce} />
+        )}
+        {scene === 'salon_day_two' && (
+          <SalonDayTwoScene reduce={reduce} />
+        )}
         {scene === 'late_night_calls' && (
           <LateNightCallsScene reduce={reduce} />
         )}
@@ -1045,6 +1057,557 @@ function DressAprilLoveScene({ reduce }: { reduce: boolean }) {
         fill="var(--rose-deep)"
       >
         her looking good &amp; happy = everything
+      </text>
+    </>
+  )
+}
+
+function DadCallAgreementScene({ reduce }: { reduce: boolean }) {
+  const sparkles = [
+    { x: 126, y: 192, sym: '✦', d: 0 },
+    { x: 144, y: 183, sym: '★', d: 0.18 },
+    { x: 160, y: 180, sym: '♥', d: 0.3 },
+    { x: 176, y: 183, sym: '★', d: 0.42 },
+    { x: 194, y: 192, sym: '✦', d: 0.54 },
+  ]
+
+  return (
+    <>
+      <defs>
+        <linearGradient id="dadBabaPanel" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#eef4fb" />
+          <stop offset="100%" stopColor="#dce8f5" />
+        </linearGradient>
+        <linearGradient id="dadMstfPanel" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#fff5f8" />
+          <stop offset="100%" stopColor="#ffe0ec" />
+        </linearGradient>
+      </defs>
+
+      <text x="160" y="22" textAnchor="middle" className="stick-svg-label" fontSize="10" fontWeight="700" fill="var(--stick-gold)">
+        20 April · her dad called me
+      </text>
+
+      {/* Baba panel - left */}
+      <rect x="10" y="30" width="110" height="132" rx="14" fill="url(#dadBabaPanel)" stroke="#8aabe0" strokeWidth="2" />
+      <text x="65" y="48" textAnchor="middle" className="stick-svg-label" fontSize="9" fontWeight="700" fill="#4a6080">
+        Baba
+      </text>
+      <StickPerson x={65} y={152} happy phone scale={0.88} />
+
+      {/* MSTF panel - right */}
+      <rect x="200" y="30" width="110" height="132" rx="14" fill="url(#dadMstfPanel)" stroke="var(--stick-accent)" strokeWidth="2" />
+      <text x="255" y="48" textAnchor="middle" className="stick-svg-label" fontSize="9" fontWeight="700" fill="var(--stick-muted)">
+        MSTF
+      </text>
+      <StickPerson x={255} y={152} happy phone blush scale={0.88} flip />
+
+      {/* Animated call waves between panels */}
+      {!reduce ? (
+        <>
+          <motion.path
+            d="M120 90 Q160 70 200 90"
+            fill="none" stroke="var(--stick-gold)" strokeWidth="2" strokeDasharray="5 5" opacity="0.8"
+            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }}
+            transition={{ duration: 1.1, repeat: Infinity, repeatDelay: 0.3 }}
+          />
+          <motion.path
+            d="M120 106 Q160 86 200 106"
+            fill="none" stroke="var(--stick-accent)" strokeWidth="1.3" strokeDasharray="3 6" opacity="0.45"
+            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
+        </>
+      ) : (
+        <path d="M120 98 Q160 78 200 98" fill="none" stroke="var(--stick-gold)" strokeWidth="1.5" strokeDasharray="5 5" opacity="0.6" />
+      )}
+
+      {/* Calendar badge center */}
+      <motion.g
+        style={{ transformOrigin: '160px 76px' }}
+        initial={reduce ? false : { scale: 0.75, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: reduce ? 0 : 0.45, type: 'spring', stiffness: 260, damping: 20 }}
+      >
+        <rect x="136" y="50" width="48" height="50" rx="8" fill="#fff" stroke="var(--stick-gold)" strokeWidth="2.5" />
+        <rect x="136" y="50" width="48" height="16" rx="8" fill="var(--stick-gold)" />
+        <rect x="136" y="58" width="48" height="8" fill="var(--stick-gold)" />
+        <text x="160" y="63" textAnchor="middle" className="stick-svg-label" fontSize="6.5" fontWeight="700" fill="#fff">
+          30 / APR
+        </text>
+        <motion.text
+          x="160" y="90" textAnchor="middle" className="stick-svg-label" fontSize="20" fontWeight="700" fill="var(--rose-deep)"
+          animate={reduce ? undefined : { scale: [1, 1.18, 1] }}
+          transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ transformOrigin: '160px 80px' }}
+        >
+          ♥
+        </motion.text>
+      </motion.g>
+      <text x="160" y="114" textAnchor="middle" className="stick-svg-label" fontSize="7.5" fontWeight="600" fill="var(--rose-deep)">
+        we're meeting! 🎉
+      </text>
+
+      {/* Roro jumping at bottom center */}
+      <motion.g
+        animate={reduce ? undefined : { y: [0, -11, 0] }}
+        transition={{ duration: 0.52, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <StickPerson x={160} y={226} happy blush scale={0.95} />
+      </motion.g>
+
+      {/* Sparkles */}
+      {!reduce && sparkles.map((sp, i) => (
+        <motion.g
+          key={i}
+          animate={{ y: [0, -8, 0], opacity: [0.35, 1, 0.35] }}
+          transition={{ duration: 1.1 + i * 0.1, repeat: Infinity, delay: sp.d }}
+          style={{ x: sp.x, y: sp.y }}
+        >
+          <text
+            textAnchor="middle"
+            className="stick-svg-label"
+            fontSize="11"
+            fill={sp.sym === '♥' ? 'var(--stick-heart)' : 'var(--stick-gold)'}
+          >
+            {sp.sym}
+          </text>
+        </motion.g>
+      ))}
+
+      <text x="160" y="250" textAnchor="middle" className="stick-svg-label" fontSize="9" fontWeight="700" fill="var(--rose-deep)">
+        both SO excited — literally!!!
+      </text>
+    </>
+  )
+}
+
+function HundredILoveYousScene({ reduce }: { reduce: boolean }) {
+  const floatingHearts = [
+    { x: 110, delay: 0 },
+    { x: 135, delay: 0.45 },
+    { x: 158, delay: 0.15 },
+    { x: 182, delay: 0.7 },
+    { x: 205, delay: 0.3 },
+    { x: 148, delay: 0.9 },
+    { x: 172, delay: 0.55 },
+  ]
+
+  return (
+    <>
+      <defs>
+        <linearGradient id="ilyBg" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#fff0f6" />
+          <stop offset="100%" stopColor="#ffd0e8" />
+        </linearGradient>
+        <radialGradient id="ilyCenterGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#ffb8d8" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#ffb8d8" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* Warm rose background */}
+      <rect x="0" y="0" width="320" height="260" fill="url(#ilyBg)" />
+      {/* Soft center glow */}
+      <ellipse cx="160" cy="160" rx="90" ry="70" fill="url(#ilyCenterGlow)" />
+
+      <text x="160" y="22" textAnchor="middle" className="stick-svg-label" fontSize="10" fontWeight="700" fill="var(--rose-deep)">
+        22 April · literally melting
+      </text>
+
+      {/* "I love you × 100 ♥" banner */}
+      <motion.g
+        style={{ transformOrigin: '160px 48px' }}
+        initial={reduce ? false : { scale: 0.85, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: reduce ? 0 : 0.3, type: 'spring', stiffness: 280, damping: 22 }}
+      >
+        <rect x="52" y="30" width="216" height="34" rx="14" fill="#fff" stroke="var(--rose-deep)" strokeWidth="2.5" />
+        <text x="160" y="52" textAnchor="middle" className="stick-svg-label" fontSize="12" fontWeight="700" fill="var(--rose-deep)">
+          I love you × 100 ♥
+        </text>
+      </motion.g>
+
+      {/* MSTF — melting on left */}
+      <motion.g
+        animate={reduce ? undefined : { rotate: [-6, 6, -6] }}
+        transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ transformOrigin: '80px 185px' }}
+      >
+        <StickPerson x={80} y={205} happy blush scale={0.9} />
+      </motion.g>
+      {/* Puddle under MSTF */}
+      <motion.ellipse
+        cx="80" cy="215" rx="20" ry="6"
+        fill="var(--stick-blush)" opacity="0.3"
+        animate={reduce ? undefined : { rx: [20, 27, 20], ry: [6, 8, 6] }}
+        transition={{ duration: 1.6, repeat: Infinity }}
+      />
+      {/* Drips */}
+      {!reduce && (
+        <>
+          <motion.path d="M74,204 Q72,213 74,222" fill="none" stroke="var(--stick-head)" strokeWidth="3" strokeLinecap="round"
+            animate={{ opacity: [0.45, 0.1, 0.45] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+          <motion.path d="M86,202 Q88,211 87,220" fill="none" stroke="var(--stick-head)" strokeWidth="2.5" strokeLinecap="round"
+            animate={{ opacity: [0.3, 0.08, 0.3] }}
+            transition={{ duration: 2.4, repeat: Infinity, delay: 0.5 }}
+          />
+        </>
+      )}
+      <text x="80" y="234" textAnchor="middle" className="stick-svg-label" fontSize="7" fill="var(--stick-muted)">
+        MSTF (melting 🫠)
+      </text>
+
+      {/* Roro — glowing and swaying on right */}
+      <motion.g
+        animate={reduce ? undefined : { rotate: [-4, 4, -4] }}
+        transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ transformOrigin: '240px 185px' }}
+      >
+        <StickPerson x={240} y={205} happy blush scale={0.9} flip />
+      </motion.g>
+      {/* Roro glow halo */}
+      <motion.circle
+        cx="240" cy="155" r="22"
+        fill="none" stroke="var(--rose-deep)" strokeWidth="1.5" opacity="0.25"
+        animate={reduce ? undefined : { r: [22, 28, 22], opacity: [0.25, 0.55, 0.25] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      />
+      <text x="240" y="234" textAnchor="middle" className="stick-svg-label" fontSize="7" fill="var(--rose-deep)">
+        Roro ♥
+      </text>
+
+      {/* Floating hearts */}
+      {!reduce && floatingHearts.map((h, i) => (
+        <motion.g
+          key={i}
+          style={{ x: h.x, y: 195 }}
+          animate={{ y: [0, -90], opacity: [0, 0.9, 0] }}
+          transition={{ duration: 2.8, repeat: Infinity, delay: h.delay, ease: 'easeOut', repeatDelay: 0.2 }}
+        >
+          <path
+            d={`M0,5 C-6,-3 -10,-8 0,-13 C10,-8 6,-3 0,5Z`}
+            fill="var(--rose-deep)"
+            transform={`scale(${0.7 + (i % 3) * 0.2})`}
+          />
+        </motion.g>
+      ))}
+
+      {/* Static hearts for reduced motion */}
+      {reduce && [
+        { x: 128, y: 155 }, { x: 160, y: 140 }, { x: 192, y: 155 },
+      ].map((h, i) => (
+        <path key={i} d="M0,4 C-5,-3 -8,-8 0,-12 C8,-8 5,-3 0,4Z"
+          fill="var(--rose-deep)" opacity="0.4"
+          transform={`translate(${h.x}, ${h.y})`}
+        />
+      ))}
+
+      {/* Big "× 100" sparkle pulse in center */}
+      <motion.text
+        x="160" y="130" textAnchor="middle"
+        className="stick-svg-label" fontSize="10" fontWeight="800"
+        fill="var(--rose-deep)" opacity="0.55"
+        animate={reduce ? undefined : { opacity: [0.35, 0.75, 0.35], scale: [1, 1.1, 1] }}
+        transition={{ duration: 1.4, repeat: Infinity }}
+        style={{ transformOrigin: '160px 125px' }}
+      >
+        × 100
+      </motion.text>
+
+      <text x="160" y="251" textAnchor="middle" className="stick-svg-label" fontSize="9" fontStyle="italic" fontWeight="600" fill="var(--rose-deep)">
+        i was literally gone, Roro
+      </text>
+    </>
+  )
+}
+
+function SalonJuiceMomentScene({ reduce }: { reduce: boolean }) {
+  return (
+    <>
+      <defs>
+        <linearGradient id="salonBg30" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#fdf8f0" />
+          <stop offset="100%" stopColor="#f0e8d8" />
+        </linearGradient>
+        <linearGradient id="sofaBlue30" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#b8d0e8" />
+          <stop offset="100%" stopColor="#90b4d0" />
+        </linearGradient>
+        <linearGradient id="sofaPink30" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#ffc8d8" />
+          <stop offset="100%" stopColor="#f0a8be" />
+        </linearGradient>
+      </defs>
+
+      {/* Warm salon room */}
+      <rect x="0" y="0" width="320" height="260" fill="url(#salonBg30)" />
+      {/* Floor */}
+      <rect x="0" y="214" width="320" height="46" fill="#d8c8a8" opacity="0.55" />
+      {/* Rug */}
+      <ellipse cx="160" cy="224" rx="128" ry="13" fill="#b89868" opacity="0.28" />
+
+      <text
+        x="160" y="22" textAnchor="middle"
+        className="stick-svg-label" fontSize="9.5" fontWeight="700" fill="#8b6a3e"
+      >
+        30 April · the salon · FINALLY inside
+      </text>
+
+      {/* ——— MSTF speech bubble (right, tail toward MSTF head ~x268 y128) ——— */}
+      <motion.g
+        initial={reduce ? false : { opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: reduce ? 0 : 0.3, type: 'spring', stiffness: 260, damping: 22 }}
+      >
+        <rect x="162" y="28" width="148" height="66" rx="12" fill="#fff" stroke="var(--stick-accent)" strokeWidth="2" />
+        {/* Tail (erase bottom border then draw outer sides) */}
+        <path d="M246,91 L265,114 L280,91 Z" fill="#fff" />
+        <path d="M246,91 L265,114 L280,91" fill="none" stroke="var(--stick-accent)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+        <text x="236" y="54" textAnchor="middle" className="stick-svg-label" fontSize="9" fill="var(--stick-muted)">
+          تسلم
+        </text>
+        <text x="236" y="73" textAnchor="middle" className="stick-svg-label" fontSize="10" fontWeight="700" fill="var(--rose-deep)">
+          ايدك ♥
+        </text>
+      </motion.g>
+
+      {/* ——— Roro "..." response bubble (left, tail toward Roro ~x155 y128) ——— */}
+      <motion.g
+        initial={reduce ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: reduce ? 0 : 0.75 }}
+      >
+        <rect x="12" y="38" width="124" height="58" rx="12" fill="#fff9fb" stroke="var(--stick-stroke)" strokeWidth="1.8" />
+        {/* Tail */}
+        <path d="M104,93 L148,115 L120,93 Z" fill="#fff9fb" />
+        <path d="M104,93 L148,115 L120,93" fill="none" stroke="var(--stick-stroke)" strokeWidth="1.8" strokeLinejoin="round" strokeLinecap="round" />
+        <text x="74" y="49" textAnchor="middle" className="stick-svg-label" fontSize="7.5" fontStyle="italic" fill="var(--stick-muted)">
+          Roro's response:
+        </text>
+        {/* Blinking dots */}
+        <motion.g
+          animate={reduce ? undefined : { opacity: [1, 0.12, 1] }}
+          transition={{ duration: 1.15, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <circle cx="54" cy="72" r="4.5" fill="var(--stick-muted)" opacity="0.65" />
+          <circle cx="70" cy="72" r="4.5" fill="var(--stick-muted)" opacity="0.65" />
+          <circle cx="86" cy="72" r="4.5" fill="var(--stick-muted)" opacity="0.65" />
+        </motion.g>
+      </motion.g>
+
+      {/* ——— Left sofa back (behind Dad) ——— */}
+      <rect x="12" y="148" width="72" height="40" rx="10" fill="url(#sofaBlue30)" stroke="var(--stick-stroke)" strokeWidth="1.8" />
+      <rect x="8"  y="146" width="16" height="76" rx="8"  fill="url(#sofaBlue30)" stroke="var(--stick-stroke)" strokeWidth="1.5" />
+      <rect x="68" y="146" width="16" height="76" rx="8"  fill="url(#sofaBlue30)" stroke="var(--stick-stroke)" strokeWidth="1.5" />
+
+      {/* Dad (seated left) */}
+      <StickPerson x={48} y={178} scale={0.95} />
+
+      {/* Sofa seat on top (covers Dad's legs) */}
+      <rect x="12" y="178" width="72" height="38" rx="6" fill="url(#sofaBlue30)" stroke="var(--stick-stroke)" strokeWidth="1.5" />
+      <text x="48" y="235" textAnchor="middle" className="stick-svg-label" fontSize="8" fill="var(--stick-muted)">Baba</text>
+
+      {/* ——— Right sofa back (behind MSTF) ——— */}
+      <rect x="238" y="148" width="72" height="40" rx="10" fill="url(#sofaPink30)" stroke="var(--stick-stroke)" strokeWidth="1.8" />
+      <rect x="234" y="146" width="16" height="76" rx="8"  fill="url(#sofaPink30)" stroke="var(--stick-stroke)" strokeWidth="1.5" />
+      <rect x="294" y="146" width="16" height="76" rx="8"  fill="url(#sofaPink30)" stroke="var(--stick-stroke)" strokeWidth="1.5" />
+
+      {/* MSTF (seated right, happy, reaching toward juice) */}
+      <StickPerson x={268} y={178} happy blush scale={0.95} flip />
+
+      {/* Sofa seat on top (covers MSTF's legs) */}
+      <rect x="238" y="178" width="72" height="38" rx="6" fill="url(#sofaPink30)" stroke="var(--stick-stroke)" strokeWidth="1.5" />
+      <text x="268" y="235" textAnchor="middle" className="stick-svg-label" fontSize="8" fill="var(--stick-muted)">MSTF</text>
+
+      {/* ——— Roro walking in center, nervous, holding juice ——— */}
+      <motion.g
+        animate={reduce ? undefined : { x: [-1.5, 1.5, -1.5] }}
+        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <StickPerson x={155} y={205} blush scale={0.88} />
+      </motion.g>
+      <text x="155" y="235" textAnchor="middle" className="stick-svg-label" fontSize="8" fill="var(--rose-deep)">Roro</text>
+
+      {/* Orange juice tray */}
+      <motion.g
+        style={{ transformOrigin: '175px 183px' }}
+        animate={reduce ? undefined : { rotate: [-4, 4, -4] }}
+        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        {/* Tray */}
+        <ellipse cx="175" cy="183" rx="17" ry="4.5" fill="#d4b896" stroke="var(--stick-stroke)" strokeWidth="1.2" />
+        {/* Glass body */}
+        <path d="M169,164 L170,181 L180,181 L181,164 Z" fill="#ffe9a0" stroke="#c8a000" strokeWidth="1.3" />
+        {/* OJ fill */}
+        <path d="M170,167 L170.5,180 L179.5,180 L180,167 Z" fill="#ff9000" opacity="0.8" />
+        {/* Glass rim */}
+        <ellipse cx="175" cy="164" rx="6.5" ry="2.2" fill="#ffe9a0" stroke="#c8a000" strokeWidth="1" />
+        {/* Straw */}
+        <line x1="177" y1="158" x2="177" y2="180" stroke="#e04444" strokeWidth="1.6" strokeLinecap="round" />
+      </motion.g>
+
+      <text
+        x="160" y="252" textAnchor="middle"
+        className="stick-svg-label" fontSize="8.5" fontStyle="italic" fill="#8b6a3e"
+      >
+        she was speechless... xD
+      </text>
+    </>
+  )
+}
+
+function SalonDayTwoScene({ reduce }: { reduce: boolean }) {
+  const miniHearts = [
+    { x: 143, delay: 0 },
+    { x: 157, delay: 0.45 },
+    { x: 170, delay: 0.22 },
+  ]
+  const qMarks = [
+    { ox: -14, delay: 0 },
+    { ox: 0,   delay: 0.2 },
+    { ox: 14,  delay: 0.4 },
+  ]
+
+  return (
+    <>
+      <defs>
+        <linearGradient id="salonBg1may" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#fffdf5" />
+          <stop offset="100%" stopColor="#fceee4" />
+        </linearGradient>
+        <radialGradient id="coupleGlow1may" cx="50%" cy="65%" r="45%">
+          <stop offset="0%" stopColor="#ffd0e8" stopOpacity="0.65" />
+          <stop offset="100%" stopColor="#ffd0e8" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* Cozy warm salon */}
+      <rect x="0" y="0" width="320" height="260" fill="url(#salonBg1may)" />
+      <rect x="0" y="214" width="320" height="46" fill="#d8c8a8" opacity="0.5" />
+      <ellipse cx="160" cy="224" rx="120" ry="12" fill="#b89868" opacity="0.22" />
+      {/* Couple glow */}
+      <ellipse cx="157" cy="185" rx="68" ry="52" fill="url(#coupleGlow1may)" />
+
+      <text
+        x="160" y="22" textAnchor="middle"
+        className="stick-svg-label" fontSize="9.5" fontWeight="700" fill="var(--rose-deep)"
+      >
+        1 May · back again · best day ever
+      </text>
+
+      {/* ——— Hazem speech bubble (upper right, tail toward Hazem ~x258 y180) ——— */}
+      <motion.g
+        style={{ transformOrigin: '234px 58px' }}
+        initial={reduce ? false : { opacity: 0, scale: 0.88, y: 10 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ delay: reduce ? 0 : 0.55, type: 'spring', stiffness: 240, damping: 20 }}
+      >
+        <rect x="148" y="28" width="164" height="76" rx="12" fill="#fffbf4" stroke="var(--stick-stroke)" strokeWidth="1.8" />
+        {/* Tail toward Hazem */}
+        <path d="M234,101 L256,120 L270,101 Z" fill="#fffbf4" />
+        <path d="M234,101 L256,120 L270,101" fill="none" stroke="var(--stick-stroke)" strokeWidth="1.8" strokeLinejoin="round" strokeLinecap="round" />
+        <text x="230" y="50" textAnchor="middle" className="stick-svg-label" fontSize="8.5" fill="var(--stick-muted)">
+          انتوا عاملين
+        </text>
+        <text x="230" y="68" textAnchor="middle" className="stick-svg-label" fontSize="11" fontWeight="700" fill="var(--rose-deep)">
+          تحالف؟
+        </text>
+        <text x="230" y="84" textAnchor="middle" className="stick-svg-label" fontSize="7.5" fill="var(--stick-muted)" fontStyle="italic">
+          — Hazem, baffled
+        </text>
+      </motion.g>
+
+      {/* ——— Dad facing away, background left ——— */}
+      <g opacity="0.45">
+        <circle cx="50" cy="152" r="13" fill="var(--stick-head)" stroke="var(--stick-stroke)" strokeWidth="1.8" />
+        <line x1="50" y1="165" x2="50" y2="200" stroke="var(--stick-stroke)" strokeWidth="3" strokeLinecap="round" />
+        <line x1="50" y1="180" x2="35" y2="196" stroke="var(--stick-stroke)" strokeWidth="2.5" strokeLinecap="round" />
+        <line x1="50" y1="180" x2="65" y2="196" stroke="var(--stick-stroke)" strokeWidth="2.5" strokeLinecap="round" />
+        <line x1="50" y1="200" x2="40" y2="224" stroke="var(--stick-stroke)" strokeWidth="2.5" strokeLinecap="round" />
+        <line x1="50" y1="200" x2="60" y2="224" stroke="var(--stick-stroke)" strokeWidth="2.5" strokeLinecap="round" />
+      </g>
+      <text x="50" y="240" textAnchor="middle" className="stick-svg-label" fontSize="7.5" fill="var(--stick-muted)" opacity="0.5">Baba</text>
+      <text x="50" y="251" textAnchor="middle" className="stick-svg-label" fontSize="6.5" fill="var(--stick-muted)" opacity="0.38">(no idea)</text>
+
+      {/* ——— MSTF (left of couple, leaning right toward Roro) ——— */}
+      <motion.g
+        style={{ transformOrigin: '128px 198px' }}
+        animate={reduce ? undefined : { rotate: [-3, 3, -3] }}
+        transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <StickPerson x={128} y={210} happy blush scale={0.9} leanToward="right" />
+      </motion.g>
+      <text x="128" y="238" textAnchor="middle" className="stick-svg-label" fontSize="7.5" fill="var(--stick-muted)">MSTF</text>
+
+      {/* ——— Roro (right of couple, leaning left toward MSTF) ——— */}
+      <motion.g
+        style={{ transformOrigin: '186px 198px' }}
+        animate={reduce ? undefined : { rotate: [3, -3, 3] }}
+        transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <StickPerson x={186} y={210} happy blush scale={0.9} flip leanToward="left" />
+      </motion.g>
+      <text x="186" y="238" textAnchor="middle" className="stick-svg-label" fontSize="7.5" fill="var(--rose-deep)">Roro</text>
+
+      {/* Clasped hands between them */}
+      <motion.g
+        style={{ transformOrigin: '157px 200px' }}
+        animate={reduce ? undefined : { scale: [1, 1.12, 1] }}
+        transition={{ duration: 1.6, repeat: Infinity }}
+      >
+        <circle cx="147" cy="200" r="5.5" fill="var(--stick-head)" stroke="var(--stick-stroke)" strokeWidth="1.5" />
+        <circle cx="167" cy="200" r="5.5" fill="var(--stick-head)" stroke="var(--stick-stroke)" strokeWidth="1.5" />
+        <path d="M150,196 L164,196" fill="none" stroke="var(--stick-blush)" strokeWidth="2.2" strokeLinecap="round" opacity="0.8" />
+      </motion.g>
+
+      {/* Tiny hearts floating up between them */}
+      {!reduce && miniHearts.map((h, i) => (
+        <motion.g
+          key={i}
+          style={{ x: h.x, y: 198 }}
+          animate={{ y: [0, -55], opacity: [0, 0.9, 0] }}
+          transition={{ duration: 2.2, repeat: Infinity, delay: h.delay, ease: 'easeOut', repeatDelay: 0.3 }}
+        >
+          <path d="M0,3 C-4,-2 -6,-5 0,-8 C6,-5 4,-2 0,3Z" fill="var(--rose-deep)" />
+        </motion.g>
+      ))}
+      {reduce && (
+        <path d="M0,3 C-4,-2 -6,-5 0,-8 C6,-5 4,-2 0,3Z" fill="var(--rose-deep)" opacity="0.5" transform="translate(157, 178)" />
+      )}
+
+      {/* ——— Hazem (right, small, young, confused) ——— */}
+      <motion.g
+        style={{ transformOrigin: '258px 206px' }}
+        animate={reduce ? undefined : { rotate: [-5, 5, -5] }}
+        transition={{ duration: 0.85, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <StickPerson x={258} y={220} scale={0.6} />
+      </motion.g>
+      <text x="258" y="240" textAnchor="middle" className="stick-svg-label" fontSize="7.5" fill="var(--stick-muted)">Hazem</text>
+
+      {/* Question marks floating around Hazem */}
+      {!reduce && qMarks.map((q, i) => (
+        <motion.g
+          key={i}
+          style={{ x: 258 + q.ox, y: 162 }}
+          animate={{ y: [0, -10, 0], opacity: [0.35, 1, 0.35] }}
+          transition={{ duration: 1.1 + i * 0.15, repeat: Infinity, delay: q.delay }}
+        >
+          <text textAnchor="middle" className="stick-svg-label" fontSize="11" fontWeight="700" fill="var(--stick-muted)">?</text>
+        </motion.g>
+      ))}
+      {reduce && (
+        <text x="258" y="156" textAnchor="middle" className="stick-svg-label" fontSize="10" fontWeight="700" fill="var(--stick-muted)">???</text>
+      )}
+
+      <text
+        x="160" y="254" textAnchor="middle"
+        className="stick-svg-label" fontSize="8.5" fontWeight="700" fill="var(--rose-deep)"
+      >
+        caught by a child. no defence.
       </text>
     </>
   )
